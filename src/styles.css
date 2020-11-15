@@ -1,0 +1,41 @@
+section {
+  position: relative;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  padding: 2.5rem 1rem 1rem;
+  box-shadow: 0 1.6px 3.6px 0 rgba(0, 0, 0, 0.132),
+    0 0.3px 0.9px 0 rgba(0, 0, 0, 0.108);
+  margin: 1rem 0;
+}
+section:before {
+  z-index: 1;
+  content: attr(data-name);
+  pointer-events: none;
+  border-radius: 0.25rem;
+  padding: 0.1rem 0.5rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: white;
+  background-color: #2980b9;
+  font-size: 20px;
+}
+section section:before {
+  background-color: #27ae60;
+  font-size: 16px;
+}
+
+.todo-item {
+  cursor: pointer;
+  padding: 0px 5px;
+}
+.todo-item:hover {
+  background: #ecf0f1;
+}
+.todo-item.done {
+  text-decoration: line-through;
+}

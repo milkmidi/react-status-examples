@@ -3,6 +3,7 @@ import ReduxExample from './components/ReduxExample';
 import PullstateExample from './components/PullstateExample';
 import RecoilExample from './components/RecoilExample';
 import MobxExample from './components/MobxExample';
+import ZustandExample from './components/ZustandExample';
 import './styles.css';
 
 export default function App() {
@@ -12,6 +13,7 @@ export default function App() {
       <PullstateExample />
       <RecoilExample />
       <MobxExample />
+      <ZustandExample />
     </div>
   );
 }

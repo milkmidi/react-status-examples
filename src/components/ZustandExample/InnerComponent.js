@@ -15,7 +15,13 @@ export function CountExampleComponent() {
 }
 
 export function TodoExampleComponent() {
-  const { todos, addTodo, toggleTodo } = useTodoStore();
+  const loading = useCountStore((state) => state.loading);
+  const {
+    todos,
+    addTodo,
+    toggleTodo,
+    fetch,
+  } = useTodoStore();
 
   const atAddTogo = useCallback(() => {
     addTodo('hi, Zustand');
@@ -25,8 +31,14 @@ export function TodoExampleComponent() {
     toggleTodo(todoId);
   }, []);
 
+  const doFetchData = useCallback(() => {
+    fetch();
+  }, []);
+
+  const rootClassName = clsx('', { 'is-loading': loading });
   return (
-    <section data-name="TodoExample">
+    <section data-name="TodoExample" className={rootClassName}>
+      <p>loading:{loading.toString()}</p>
       <ul>
         {todos.map((todo) => {
           const className = clsx('todo-item', {
@@ -46,6 +58,7 @@ export function TodoExampleComponent() {
       <button className="btn btn-info" onClick={atAddTogo}>
         add todo
       </button>
+      <button className="btn btn-warning" onClick={doFetchData}>fetchData</button>
     </section>
   );
 }

@@ -1,11 +1,15 @@
 import create from 'zustand';
+import fetchData from '../../../services/api';
 // import { TodoType } from '../../../types';
 
 export const useCountStore = create((set) => ({
   count: 0,
+  loading: false,
   increment: () => set((state) => ({ count: state.count + 1 })),
   decrement: () => set((state) => ({ count: state.count - 1 })),
 }));
+
+useCountStore.subscribe(console.log);
 
 const initialState = [
   {
@@ -40,4 +44,14 @@ export const useTodoStore = create((set) => ({
       }
     }
   }),
+  fetch: async () => {
+    useCountStore.setState({ loading: true });
+    const result = await fetchData();
+    set((state) => {
+      state.todos.push(result);
+      useCountStore.setState({ loading: false });
+    });
+  },
+
 }));
+useTodoStore.subscribe(console.log);

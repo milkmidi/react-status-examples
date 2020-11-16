@@ -11,6 +11,39 @@ section {
     0 0.3px 0.9px 0 rgba(0, 0, 0, 0.108);
   margin: 1rem 0;
 }
+
+
+section.is-loading::after{
+  display: block;
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #00000088;
+}
+
+section.is-loading::before{
+  position: absolute;
+  content: '';
+  display: inline-block;
+  border: 4px solid white;
+  border-color: white;
+  border-left-color: transparent;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 2;
+  animation: donutSpin 1.2s linear infinite;
+}
 section:before {
   z-index: 1;
   content: attr(data-name);
@@ -39,3 +72,14 @@ section section:before {
 .todo-item.done {
   text-decoration: line-through;
 }
+
+
+@keyframes donutSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+

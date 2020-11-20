@@ -6,7 +6,7 @@ import { CountExampleComponent, TodoExampleComponent } from './InnerComponent';
 
 const store = createStore(reducer);
 
-export default function ReduxExample() {
+export default function () {
   return (
     <Provider store={store}>
       <section data-name="Redux">

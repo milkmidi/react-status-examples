@@ -3,7 +3,7 @@ import { CountExampleComponent, TodoExampleComponent } from './InnerComponent';
 
 export default function () {
   return (
-    <section data-name="Pullstate">
+    <section data-name="Valtio">
       <CountExampleComponent />
       <TodoExampleComponent />
     </section>

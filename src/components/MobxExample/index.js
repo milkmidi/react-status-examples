@@ -4,7 +4,7 @@ import { CountExampleComponent, TodoExampleComponent } from './InnerComponent';
 
 import store from './store';
 
-export default function ReduxExample() {
+export default function () {
   return (
     <Provider store={store}>
       <section data-name="Mobx">

@@ -4,7 +4,7 @@ import {
 } from 'recoil';
 import { CountExampleComponent, TodoExampleComponent } from './InnerComponent';
 
-export default function ReduxExample() {
+export default function () {
   return (
     <RecoilRoot>
       <section data-name="Recoil">

@@ -1,15 +1,25 @@
 import React, { useCallback } from 'react';
 import clsx from 'clsx';
+import shallow from 'zustand/shallow';
 import { useCountStore, useTodoStore } from './store';
+import RenderTip from '../RenderTip';
 
 export function CountExampleComponent() {
-  const { count, increment, decrement } = useCountStore();
+  //
+  // const { count, increment, decrement } = useCountStore();
+
+  const { count, increment, decrement } = useCountStore((state) => ({
+    count: state.count,
+    increment: state.increment,
+    decrement: state.decrement,
+  }), shallow);
 
   return (
     <section data-name="CountExample">
       <h3>count:{count}</h3>
       <button className="btn btn-primary mr-1" onClick={increment}>+</button>
       <button className="btn btn-danger" onClick={decrement}>-</button>
+      <RenderTip />
     </section>
   );
 }
@@ -39,6 +49,7 @@ export function TodoExampleComponent() {
   return (
     <section data-name="TodoExample" className={rootClassName}>
       <p>loading:{loading.toString()}</p>
+      <RenderTip />
       <ul>
         {todos.map((todo) => {
           const className = clsx('todo-item', {

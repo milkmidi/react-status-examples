@@ -18,5 +18,8 @@ module.exports = {
     'react/state-in-constructor': 0,
     'react/jsx-one-expression-per-line': 0,
     'no-plusplus': 0,
+    'react/no-children-prop': 0,
+    'import/no-unresolved': 0,
+    'import/no-webpack-loader-syntax': 0,
   },
 };

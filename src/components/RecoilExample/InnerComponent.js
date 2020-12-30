@@ -3,13 +3,24 @@ import clsx from 'clsx';
 import {
   useRecoilState,
   useRecoilValue,
-  // useSetRecoilState,
+  useRecoilValueLoadable,
 } from 'recoil';
-import { countState, todosState, todosCountState } from './store';
+import RenderTip from '../RenderTip';
+import {
+  countState,
+  todosState,
+  todosCountState,
+  fetchUserDetails,
+} from './store';
+
 // import { type TodoType } from '../../types';
 
 export function CountExampleComponent() {
   const [count, setCount] = useRecoilState(countState);
+
+  const userDetails = useRecoilValueLoadable(fetchUserDetails);
+
+  console.log(userDetails);
 
   const atIncrement = useCallback(() => {
     setCount((prev) => prev + 1);
@@ -21,6 +32,7 @@ export function CountExampleComponent() {
 
   return (
     <section data-name="CountExample">
+      <RenderTip />
       <h3>count:{count}</h3>
       <button className="btn btn-primary mr-1" onClick={atIncrement}>+</button>
       <button className="btn btn-danger" onClick={atDecrement}>-</button>
@@ -62,6 +74,7 @@ export function TodoExampleComponent() {
 
   return (
     <section data-name="TodoExample">
+      <RenderTip />
       <ul>
         {todos.map((todo) => {
           const className = clsx('todo-item', {

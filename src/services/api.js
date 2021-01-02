@@ -1,4 +1,6 @@
-export default function fetchData() {
+import { TodoType } from '../types';
+
+export default function fetchData():Promise<TodoType> {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve({

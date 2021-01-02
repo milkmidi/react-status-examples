@@ -3,14 +3,19 @@ import clsx from 'clsx';
 import {
   useRecoilState,
   useRecoilValue,
-  useRecoilValueLoadable,
+  // useRecoilValueLoadable,
+  useSetRecoilState,
 } from 'recoil';
 import RenderTip from '../RenderTip';
 import {
   countState,
   todosState,
+  commonState,
+  addTodo,
+  toggleTodo,
   todosCountState,
-  fetchUserDetails,
+  // fetchUserDetails,
+  fetchDataAction,
 } from './store';
 
 // import { type TodoType } from '../../types';
@@ -18,9 +23,8 @@ import {
 export function CountExampleComponent() {
   const [count, setCount] = useRecoilState(countState);
 
-  const userDetails = useRecoilValueLoadable(fetchUserDetails);
-
-  console.log(userDetails);
+  // const userDetails = useRecoilValueLoadable(fetchUserDetails);
+  // console.log(userDetails);
 
   const atIncrement = useCallback(() => {
     setCount((prev) => prev + 1);
@@ -40,40 +44,30 @@ export function CountExampleComponent() {
   );
 }
 
-let id = 0;
 export function TodoExampleComponent() {
-  const [todos, setTodos] = useRecoilState(todosState);
+  const [todos] = useRecoilState(todosState);
+  const common = useRecoilValue(commonState);
+  console.log(common);
   const todosCount = useRecoilValue(todosCountState);
+  const recoilActionFetchData = useSetRecoilState(fetchDataAction);
+  const recoilActionAddTodo = useSetRecoilState(addTodo);
+  const actionToggleTodo = useSetRecoilState(toggleTodo);
 
   const atAddTogo = useCallback(() => {
-    id += 1;
-    setTodos((oldTodoList) => [
-      ...oldTodoList,
-      {
-        id: id.toString(),
-        text: `hi, recoil${id}`,
-        done: false,
-      },
-    ]);
+    recoilActionAddTodo('hi');
   }, []);
 
   const atToggleTodo = useCallback((todoId:string) => {
-    setTodos((prevTodos) => {
-      const newList = prevTodos.map((todo) => {
-        if (todo.id === todoId) {
-          return {
-            ...todo,
-            done: !todo.done,
-          };
-        }
-        return todo;
-      });
-      return newList;
-    });
+    actionToggleTodo(todoId);
   }, []);
 
   return (
-    <section data-name="TodoExample">
+    <section
+      className={clsx('recoil-component', {
+        'is-loading': common.loading,
+      })}
+      data-name="TodoExample"
+    >
       <RenderTip />
       <ul>
         {todos.map((todo) => {
@@ -94,6 +88,7 @@ export function TodoExampleComponent() {
       <button className="btn btn-info mr-2" onClick={atAddTogo}>
         add todo
       </button>
+      <button className="btn btn-warning" onClick={recoilActionFetchData}>fetchTodo</button>
       <p>todo count: {todosCount}</p>
     </section>
   );

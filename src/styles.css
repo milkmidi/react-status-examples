@@ -83,3 +83,6 @@ section section:before {
   }
 }
 
+.app > section:nth-child(2n+1) {
+  background-color: #ddd;
+}
